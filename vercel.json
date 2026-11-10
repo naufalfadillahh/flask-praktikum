@@ -1,0 +1,1 @@
+{ "functions": { "api/index.py": { "includeFiles": "{biodata,pemjar-pert6,pemjar-pert7}/**" } }, "rewrites": [ { "source": "/(.*)", "destination": "/api/index" } ] }
