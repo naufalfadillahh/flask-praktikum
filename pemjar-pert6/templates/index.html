@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Streaming - Gunadarma</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='video/gunadarma.ico') }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: radial-gradient(900px circle at 10% 10%, rgba(13,110,253,.18), transparent 50%),
+                        radial-gradient(900px circle at 90% 30%, rgba(25,135,84,.16), transparent 45%),
+                        linear-gradient(180deg, #0b1220 0%, #0f1b2d 45%, #0b1220 100%);
+            color: #e8eef6;
+        }
+
+        .glass {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(12px);
+        }
+
+        .video-player {
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+            background-color: #000;
+            border: 1px solid rgba(255,255,255,0.10);
+        }
+
+        .video-card {
+            padding: 22px;
+            border-radius: 22px;
+            margin-bottom: 28px;
+            border: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 60px rgba(0,0,0,0.35);
+        }
+
+        .btn-custom {
+            border-radius: 10px;
+            padding: 9px 18px;
+            font-weight: 600;
+            letter-spacing: .2px;
+        }
+
+        .muted-text {
+            color: rgba(232,238,246,0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container py-5">
+        <header class="text-center mb-5">
+            <div class="d-inline-flex align-items-center gap-2 glass px-4 py-2 rounded-pill">
+                <span class="badge text-bg-primary rounded-pill">LIVE</span>
+                <h2 class="m-0 display-6 fw-bold">Portal Video Streaming</h2>
+            </div>
+            <p class="muted-text mt-3 mb-0">Platform pemutaran konten multimedia digital</p>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-7">
+                
+                <!-- VIDEO 1 SECTION -->
+                <div class="video-card glass shadow-sm">
+                    <h5 class="mb-3 fw-bold"><i class="bi bi-collection-play"></i> Video Utama</h5>
+                    <video id="videoPlayer" class="video-player" controls>
+                        <source src="{{ url_for('static', filename='video/video2.mp4') }}" type="video/mp4">
+                        Browser Anda tidak mendukung pemutaran video.
+                    </video>
+
+                    <div class="mt-4 d-flex justify-content-center gap-2">
+                        <button id="playBtn1" class="btn btn-primary btn-custom" type="button">Play</button>
+                        <button id="pauseBtn1" class="btn btn-outline-primary btn-custom" type="button">Pause</button>
+                        <button id="fullScreenBtn1" class="btn btn-dark btn-custom" type="button">Full Screen</button>
+                    </div>
+                </div>
+
+                <!-- VIDEO 2 SECTION -->
+                <div class="video-card glass shadow-sm">
+                    <h5 class="mb-3 fw-bold">Video Dokumentasi</h5>
+                    <video id="videoPlayer2" class="video-player" controls>
+                        <source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4">
+                        Browser Anda tidak mendukung pemutaran video.
+                    </video>
+
+                    <div class="mt-4 d-flex justify-content-center gap-2">
+                        <button id="playBtn2" class="btn btn-success btn-custom" type="button">Play</button>
+                        <button id="pauseBtn2" class="btn btn-outline-success btn-custom" type="button">Pause</button>
+                        <button id="fullScreenBtn2" class="btn btn-dark btn-custom" type="button">Full Screen</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Scripts (Pastikan file ini ada di folder static/js/) -->
+    <script src="{{ url_for('static', filename='js/video.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/video2.js') }}"></script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tampilan Fitur Mahasiswa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('gunadarma.jpg'); /* Ganti dengan file gambar latar belakang */
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
+        header {
+            background: #1976D2;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #1976D2;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #1976D2;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #1976D2;
+        }
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .hyperlink {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #1976D2;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1976D2;
+        }
+        .delete-btn {
+            background-color: #f44336;
+        }
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #1976D2;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        function addRow() {
+            const table = document.getElementById("dataTable");
+            const name = document.getElementById("name").value;
+            const npm = document.getElementById("npm").value;
+            const kelas = document.getElementById("kelas").value;
+
+            if (name && npm && kelas) {
+                const row = table.insertRow(-1);
+                row.insertCell(0).innerText = name;
+                row.insertCell(1).innerText = npm;
+                row.insertCell(2).innerText = kelas;
+
+                // Create delete button
+                const deleteCell = row.insertCell(3);
+                const deleteButton = document.createElement("button");
+                deleteButton.innerText = "Hapus";
+                deleteButton.className = "delete-btn";
+                deleteButton.onclick = function() {
+                    deleteRow(this);
+                };
+                deleteCell.appendChild(deleteButton);
+
+                // Clear the form fields
+                document.getElementById("name").value = '';
+                document.getElementById("npm").value = '';
+                document.getElementById("kelas").value = '3IA17';
+            } else {
+                alert("Silakan isi semua field!");
+            }
+        }
+
+        function deleteRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Tampilan Fitur Mahasiswa</h1>
+    </header>
+
+    <main>
+        <h2>Tabel Data Mahasiswa</h2>
+        <table id="dataTable">
+            <tr>
+                <th>Nama</th>
+                <th>NPM</th>
+                <th>Kelas</th>
+                <th>Aksi</th>
+            </tr>
+            <tr>
+                <td>Naufal</td>
+                <td>51422219</td>
+                <td>3IA17</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Hapus</button></td>
+            </tr>
+            <tr>
+                <td>Rizqi</td>
+                <td>51422220</td>
+                <td>3IA17</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Hapus</button></td>
+            </tr>
+            <tr>
+                <td>Adam</td>
+                <td>51422221</td>
+                <td>3IA17</td>
+                <td><button class="delete-btn" onclick="deleteRow(this)">Hapus</button></td>
+            </tr>
+        </table>
+
+        <h2>Form Tambah Data</h2>
+        <form onsubmit="event.preventDefault(); addRow();">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" required>
+
+            <label for="npm">NPM:</label>
+            <input type="text" id="npm" required>
+
+            <label for="kelas">Kelas:</label>
+            <input type="text" id="kelas" value="3IA17" required readonly>
+
+            <input type="submit" value="Tambah">
+        </form>
+
+        <h2>Frame Form Login</h2>
+        <div class="frame">
+            <iframe src="https://vm.lepkom.gunadarma.ac.id/" title="Form Login"></iframe>
+        </div>
+
+        <div class="hyperlink">
+            <h2>Link ke Praktikum Gunadarma</h2>
+            <a href="https://praktikum.gunadarma.ac.id/login/index.php" target="_blank">
+                <button>Klik untuk Masuk</button>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Web ini milik Naufal Fadillah</p>
+    </footer>
+
+</body>
+</html>

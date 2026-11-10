@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Tebak Angka - 5 Nyawa</title>
+    <style>
+        /* CSS untuk membuat tampilan game berada persis di tengah layar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #333333;
+            margin-top: 0;
+        }
+
+        /* Indikator visual nyawa menggunakan emotikon hati */
+        .heart-container {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            width: 80%;
+            padding: 12px;
+            font-size: 18px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.3s;
+            margin-bottom: 15px;
+        }
+
+        input[type="number"]:focus {
+            border-color: #667eea;
+        }
+
+        .btn-submit {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 86%;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #5a67d8;
+        }
+
+        /* --- Kelas CSS Dinamis untuk Hasil Tebakan --- */
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Warna HIJAU saat menang */
+        .alert-menang {
+            background-color: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+
+        /* Warna MERAH saat kalah / Game Over */
+        .alert-kalah {
+            background-color: #fed7d7;
+            color: #742a2a;
+            border: 1px solid #feb2b2;
+        }
+
+        /* Warna ORANYE/KUNING saat tebakan salah (terlalu rendah/tinggi) */
+        .alert-salah {
+            background-color: #feebc8;
+            color: #744210;
+            border: 1px solid #fbd38d;
+        }
+
+        .btn-reset {
+            display: inline-block;
+            margin-top: 25px;
+            background-color: #e2e8f0;
+            color: #4a5568;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-reset:hover {
+            background-color: #cbd5e0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Tebak Angka 🎯</h1>
+        
+        <div class="heart-container">
+            {% if session.get('nyawa') is not none %}
+                {% for i in range(session.get('nyawa')) %}❤️{% endfor %}
+                {% for i in range(5 - session.get('nyawa')) %}🖤{% endfor %}
+            {% endif %}
+        </div>
+
+        {% if status != 'menang' and status != 'kalah' %}
+            <p>Tebak angka antara <b>1 sampai 100</b>.<br>Gunakan kesempatanmu dengan bijak!</p>
+            <form method="POST" action="{{ url_for('tebak') }}">
+                <input type="number" name="tebakan" min="1" max="100" required placeholder="Angka tebakan">
+                <br>
+                <button type="submit" class="btn-submit">Kirim Tebakan</button>
+            </form>
+        {% endif %}
+
+        {% if pesan %}
+            {% if status == 'menang' %}
+                <div class="alert alert-menang">{{ pesan }}</div>
+            {% elif status == 'kalah' %}
+                <div class="alert alert-kalah">{{ pesan }}</div>
+            {% elif status == 'salah' %}
+                <div class="alert alert-salah">{{ pesan }}</div>
+            {% endif %}
+        {% endif %}
+
+        <a href="{{ url_for('reset') }}" class="btn-reset">
+            {% if status == 'menang' or status == 'kalah' %}Main Lagi 🔁{% else %}Mulai Ulang Game{% endif %}
+        </a>
+    </div>
+
+</body>
+</html>

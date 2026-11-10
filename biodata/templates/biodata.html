@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('{{ url_for("static", filename="gunadarma.jpg") }}');
+            background-size: cover;
+            background-position: center;
+            color: black; /* Ganti warna teks jika perlu */
+        }
+        .biodata-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Warna latar belakang putih dengan transparansi */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container biodata-container">
+        <h1 class="text-center">Biodata</h1>
+        <p>Nama: Naufal Fadillah</p>
+        <p>Umur: 20 tahun</p>
+        <p>Alamat: Bogor, Indonesia</p>
+        <p>Email: naufalfadillahtsa@gmail.com</p>
+        <p>Hobi: Bersepeda dan Jogging</p>
+        <a href="/" class="btn btn-secondary mt-3">Kembali ke Halaman Utama</a>
+    </div>
+</body>
+</html>
