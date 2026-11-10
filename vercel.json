@@ -1,1 +1,1 @@
-{ "functions": { "api/index.py": { "includeFiles": "{biodata,pemjar-pert6,pemjar-pert7}/**" } }, "rewrites": [ { "source": "/(.*)", "destination": "/api/index" } ] }
+{ "builds": [ { "src": "api/index.py", "use": "@vercel/python", "config": { "includeFiles": ["biodata/**", "pemjar-pert6/**", "pemjar-pert7/**"] } } ], "routes": [ { "src": "/(.*)", "dest": "api/index.py" } ] }

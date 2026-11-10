@@ -7,3 +7,5 @@ dist/
 .DS_Store
 .vercel
 __pycache__/
+
+.vercel
